@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-12">
+       <div class="add-portfolio" style="margin-bottom:10px">
+          <span>Setting Tanggal Jatuh Tempo Angsuran Kelas Malam</span>  
+         <a href="#add" class="btn" style="float:right;" data-toggle="modal"><i class="icon-plus"> </i> Tambah</a>
+       </div>							  
+         <div class="col-md-12" style="margin-bottom:10px;margin-left: -13px;">
+             <select  class="form-control" name="periode" id="periode">
+                     {foreach name=lope from=$periode item=row}
+                     <option value="{$row->kode}">{$row->nama}</option>
+                     {/foreach}
+             </select>
+         </div>
+    </div>						   
+ </div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="tblTanggal" name="tblJadwal">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-wide">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+             <h4 class="modal-title">Tambah Tanggal Jatuh Tempo Kelas Malam</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{$host}admisi/dueDate/add" class="form-horizontal" method="post">
+                <div class="form-body">
+                        <div class="form-group">
+                            <input id="tmp" value="" name="tmp" hidden="">
+                            <label  class="control-label col-md-3">Periode Angsuran</label>
+                            <div class="col-md-9">
+                                <select class="form-control" id="jenjang"  name="periode" class="periode">
+                                    {foreach name=lope from=$periode item=row}
+                                            <option value="{$row->kode}">{$row->nama}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label  class="control-label col-md-3">Jumlah Angsuran</label>
+                                <div class="input-group col-md-9">
+                                       <input type="text" class="form-control" placeholder="" id="tempo" name="tempo">
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                       <button type="button" class="btn default" data-dismiss="modal">Keluar</button>
+                       <button type="submit" class="btn blue" id="save" value="add" name="opt"> Simpan <i class="icon-plus"></i></a>
+                </div>
+            </form>
+          </div>
+       </div>
+    </div>
+</div>
+<script>
+jQuery(document).ready(function() {  
+    FormComponents.init();
+    changePeriode();
+});
+$("#periode").change(function(){
+       changePeriode(); 
+});
+
+$('#tempo').change(function(){
+   var tempo = $(this).val();   
+   var tmp = $('#tmp').val();
+   $('#tmp').val(tempo); 
+   for($i = 1;$i <= tmp;$i++){
+        $('.row-'+$i).remove();
+   }
+   
+   
+   for($i = 1;$i <= tempo;$i++){
+        $('.form-body').append(
+             '<div class="form-group row-'+ $i +' ">'+
+                 '<label class="control-label col-md-3">Tanggal Angsuran '+ $i +'</label>'+
+                 '<div class="col-md-9">'+
+                 '<div class="input-group input-large date-picker" data-date="10/11/2012" data-date-format="yyyy-mm-dd">'+
+                     '<input type="text" class="form-control" name="tanggal-'+ $i +'"  placeholder="dd-mm-yyyy">'+
+                 '</div>'+
+                 '</div>'+
+             '</div>');
+   }
+});
+
+{literal}
+    function changePeriode(){
+        $.post("{/literal}{$host}{literal}admisi/dueDate",{'periode':$('#periode').val()},
+            function(resp){
+                $('#tblTanggal').html(resp);
+            });
+    }
+{/literal}
+</script>

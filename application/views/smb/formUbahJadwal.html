@@ -1,0 +1,31 @@
+<form action="{$host}smb/ubahJadwal/simpan/do" class="form-horizontal" method="post">
+        <div class="form-body">                
+            <div class = "row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                          <label  class="control-label col-md-3">Pilih Jadwal Ujian</label>
+                          <div class="col-md-9">
+                                <input name="val" value="{$cmb.kode}" hidden>
+                                <input name="tgl" value="{$cmb.event}" hidden>
+                                <select class="form-control" id="jadwal"  name="jadwal" class="pww1">
+                                    {foreach name=lope from=$jadwal item=row}
+                                        <option value="{$row->kode}" {if $row->kode eq $cmb.event}selected{/if}>{$row->nama} - {$row->tanggal}</option>
+                                    {/foreach}
+                                </select>
+                          </div>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+        <div class="modal-footer">
+               <button type="button" class="btn default" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn blue" id="saves" value="simpanJdl" name="opt"> Simpan <i class="icon-plus"></i></button>
+        </div>
+</form>
+<script>
+jQuery(document).ready(function() {       
+         // initiate layout and plugins
+         FormComponents.init();
+	});
+</script>

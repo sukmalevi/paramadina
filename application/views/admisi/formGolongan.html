@@ -1,0 +1,47 @@
+<form action="{$host}admisi/golonganParalel/edit" class="form-horizontal" method="post">
+        <div class="form-body">
+            <input name="val" value="{$d_gol.id}" hidden>
+                  <div class="form-group">
+                         <label  class="control-label col-md-3">Golongan Kelas Malam</label>
+                         <div class="col-md-9">
+                              <select class="form-control" id="props"  name="golongan" class="gedung">
+                                      {foreach name=loop from=$gol item=row} 
+                                              <option value="{$row.id}" {if $d_gol.id_gol eq $row.id}selected{/if}>{$row.golongan_d3}</option>
+                                      {/foreach}
+                              </select>
+                         </div>
+                  </div>
+                  <div class="form-group">
+                         <label  class="control-label col-md-3">Program Studi</label>
+                         <div class="col-md-9">
+                          <select class="form-control" id="props"  name="prodi" class="gedung">
+                               {foreach name=loop from=$prodi item=row} 
+                                   <option value="{$row.kode}" {if $d_gol.id_prodi eq $row.kode}selected{/if}>{$row.nama}</option>
+                               {/foreach}
+                           </select>
+                         </div>
+                  </div>
+                  <div class="form-group">
+                         <label  class="control-label col-md-3">Jumlah SKS</label>
+                         <div class="input-group col-md-9">
+                                <input type="text" class="form-control" value="{$d_gol.jumlah_sks}" id="ruang" name="sks">
+                         </div>
+                  </div>
+                    <div class="form-group">
+                           <label  class="control-label col-md-3">Jumlah Semester</label>
+                           <div class="input-group col-md-9">
+                                  <input type="text" class="form-control" placeholder="Jumlah Total Semester" value="{$d_gol.jumlah_semester}" name="semester">
+                           </div>
+                    </div>
+                    <div class="form-group">
+                           <label  class="control-label col-md-3">Total SKS</label>
+                           <div class="input-group col-md-9">
+                                  <input type="text" class="form-control" value="{$d_gol.total_sks}" id="ruang" name="totalSks">
+                           </div>
+                    </div>
+        </div>
+  <div class="modal-footer">
+         <button type="button" class="btn default" data-dismiss="modal">Keluar</button>
+         <button type="submit" class="btn blue" id="save" value="post" name="opt"> Simpan <i class="icon-plus"></i></a>
+  </div>
+</form>

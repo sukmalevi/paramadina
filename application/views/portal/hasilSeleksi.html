@@ -1,0 +1,98 @@
+			<div class="promo-page">
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="block-carousel">
+					<div id="promo_carousel" class="carousel slide">
+					{if $hasil->lulusTidak eq '1'}
+						<div class="container">
+							<div class="carousel-inner">
+								<div class="active item">
+									<div class="row">
+										<div class="col-md-7 margin-bottom-20 margin-top-20">
+											<h1>Welcome to Paramadina!</h1>
+											<p>Selamat <b>{$hasil->student}</b>, Anda telah Lulus Seleksi Ujian Masuk Universitas Paramadina pada</p>
+											<p>Program Studi <b>{$hasil->progdi}</b> dengan mendapat <b>Peringkat {$hasil->hasilAkhir}</b></p>
+											<p>Silahkan lakukan pendaftaran ulang untuk tahap masuk berikutnya.</p>
+											<br>
+											<a 
+											{if $termcond eq '1'}
+											href="{$host}portal/daftarUlang"
+											{else}
+											href="{$host}portal/lampiran/1"
+											{/if} class="btn red btn-lg m-icon-big">
+											Daftar Ulang <i class="m-icon-big-swapright m-icon-white"></i>                                
+											</a>
+										</div>
+										<!-- <div class="col-md-5 animated rotateInDownLeft">
+											<a href="index.html"><img src="{$host}assets/img/man-winner.png" alt="" class="img-responsive"></a>
+										</div> -->
+										<div class="col-md-5">
+											<a href="index.html"><img src="{$host}assets/img/mhs-upm.jpg" alt="" class="img-responsive"></a>
+										</div>
+									</div>
+								</div>
+							</div><!-- 
+							<a class="carousel-control left" href="#promo_carousel" data-slide="prev">
+							<i class="m-icon-big-swapleft"></i>
+							</a>
+							<a class="carousel-control right" href="#promo_carousel" data-slide="next">
+							<i class="m-icon-big-swapright"></i>
+							</a> -->
+							<!-- Indicators --><!-- 
+							<ol class="carousel-indicators">
+								<li data-target="#promo_carousel" data-slide-to="0" class="active"></li>
+								<li data-target="#promo_carousel" data-slide-to="1"></li>
+							</ol> -->
+						</div>
+					{else}
+						<div class="container">
+							<div class="carousel-inner">
+								<div class="active item">
+									<div class="row">
+										<div class="col-md-5">
+											<a href="index.html"><img src="{$host}assets/img/woman.png" alt="" class="img-responsive"></a>
+										</div>
+										<!-- <div class="col-md-7 margin-bottom-20 margin-top-20 animated rotateInUpRight">
+											<h1>Mohon Maaf..</h1>
+											<p>Anda belum berhasil pada ujian seleksi masuk Paramadina kali ini,</p>
+											<p>Silahkan mencoba kembali pada kesempatan berikutnya.</p>
+											<br>
+											<a href='#' class="go btn blue btn-lg m-icon-big">
+											www.paramadina.ac.id <i class="m-icon-big-swapright m-icon-white"></i>
+											</a>
+										</div> -->
+										<div class="col-md-7 margin-bottom-20 margin-top-20">
+										<h3>Mohon Maaf,</h3>
+										<p>Terima kasih atas kepercayaan Saudara <b>{$hasil->student}</b> untuk mengikuti Seleksi Mahasiswa Baru</p>
+										<p>di Universitas Paramadina.</p>
+										<p>Setelah meninjau hasil tes dan wawancara Saudara pada Seleksi Mahasiswa Baru, yang meliputi</p>
+										<p>aspek kemampuan kognitif, minat, motivasi, keterampilan, dan kepribadian, dengan berat hati kami</p>
+										<p><b>belum dapat menerima Saudara sebagai mahasiswa Universitas Paramadina untuk tahun</b></p>
+										<p><b>akademik 2014/2015.</b></p>
+										<br/>
+										<p>Semoga Anda dapat meraih kesuksesan sesuai dengan yang telah dicita-citakan, di mana pun berada.</p>
+										</div>
+									</div>
+								</div>
+							</div><!-- 
+							<a class="carousel-control left" href="#promo_carousel" data-slide="prev">
+							<i class="m-icon-big-swapleft"></i>
+							</a>
+							<a class="carousel-control right" href="#promo_carousel" data-slide="next">
+							<i class="m-icon-big-swapright"></i>
+							</a> -->
+							<!-- Indicators --><!-- 
+							<ol class="carousel-indicators">
+								<li data-target="#promo_carousel" data-slide-to="0" class="active"></li>
+								<li data-target="#promo_carousel" data-slide-to="1"></li>
+							</ol> -->
+						</div>
+					{/if}
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
+			</div>
+<script>
+$('.go').click(function (){
+	window.location.href = 'http://www.paramadina.ac.id';
+});
+</script>

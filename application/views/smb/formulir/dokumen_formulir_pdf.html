@@ -1,0 +1,207 @@
+<div id='content'>
+	<table width="100%"  style="margin-top:-100px; font-family:arial; font-size:12px;" cellpadding="5">	
+		  <tr>
+			<td align='left' style='border: 0px solid #DDDDDD; background-color:#F9F9F9;font-size:13px;' width="80%">
+				Nama Lengkap : {$prof->nama_cm}
+			</td>
+			<td align='center' width="20%" style='border: 0px solid #DDDDDD; background-color:#F9F9F9;' rowspan="4">
+				<img src='assets/upload/foto/{$prof->foto}' style='margin-top:0px;margin-right:0px;height:100px'><br/>
+			</td>
+		  </tr>
+		  <tr>
+			<td align='left' style='border: 0px solid #DDDDDD; background-color:#F9F9F9;font-size:13px;' colspan='2'>
+				Program Studi : 
+				{foreach from=$prodi item=row}
+					{if $prof->proKode eq $row.kode}{$row.nama}<br>{/if}
+				{/foreach}
+			</td>
+		  </tr>
+		  <tr>
+			<td align='left' style='border: 0px solid #DDDDDD; background-color:#F9F9F9;font-size:13px;' colspan='2'>
+				NIM : {$prof->nim}
+			</td>
+		  </tr>
+		  <tr>
+			<td align='left' style='border: 0px solid #DDDDDD; background-color:#F9F9F9;font-size:13px;' colspan='2'>
+				No. Registrasi  : {$prof->no_smb}
+			</td>
+		  </tr>
+	</table>
+	<h4 style="font-size:13px;">Data Pribadi :</h4>
+	<table width="100%"  style="margin-top:-100px; font-family:arial; font-size:12px;" cellpadding="5">	
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td width="20%">Jenis Kelamin</td>
+			   <td>
+				   {if $prof->kodeGender eq '03.W'}Perempuang{else}Perempuan{/if}
+			   </td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Tempat/Tanggal Lahir</td>
+			   <td>{$prof->tempatLahir}, {$prof->tLahir} {$prof->bLahir} {$prof->yLahir}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Agama</td>
+			   <td>{$prof->agamaName}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>No KTP/SIM/KTS/Paspor</td>
+			   <td>{$prof->nomorKtp}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Asal Sekolah</td>
+			   <td>{$prof->namaEdu}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Jurusan</td>
+			   <td>
+				 {$prof->jurusan}
+			   </td>
+			</tr>
+			<tr style="border-bottom: 1px solid #DDDDDD;">
+				<td></td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Alamat Rumah </td>
+			   <td>{$prof->rumahAlamat} {$prof->kabKotaNama} {$prof->propNama}, {$prof->kodePos}</td>
+			</tr>						
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Telpon/Fax</td>
+			   <td>{$prof->rumahTel} / {$prof->rumahFax}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Kontak</td>
+			   <td><b>Hp</b> : {$prof->rumahCell} <b>e-mail</b> : {$prof->kode_smb}</td>
+			</tr>
+			<tr style="border-bottom: 1px solid #DDDDDD;">
+				<td></td>
+			</tr>
+	</table>
+	<font style="font-size:13px;">RIWAYAT PENDIDIKAN FORMAL</font>
+	<table width="100%" style="border: 1px solid #DDDDDD;font-size:12px;" cellpadding="3">
+		<tr >
+		   <td  align='left' ></td>
+		   <td align='left' >Nama Sekolah</td>
+		   <td align='left' >Kota</td>
+		   <td align='left' >Tahun Lulus</td>
+		   <td align='left' >Jurusan</td>
+		   <td align='left' >NIM/IPK</td>
+		</tr>
+	  {foreach name=loop from=$eduList item=row}
+		<tr >
+		   <td style="background-color:#F9F9F9;;"><b>{$row->sekolahNama}</b></td>
+		   <td style="background-color:#F9F9F9;;">{$row->sekolah}</td>
+		   <td style="background-color:#F9F9F9;;">{$row->kabNama}</td>
+		   <td style="background-color:#F9F9F9;;">{$row->tahunLulus}</td>
+		   <td style="background-color:#F9F9F9;;">{$row->jurusan}</td>
+		   <td style="background-color:#F9F9F9;;">{$row->nilai}</td>
+		</tr>
+	  {/foreach}
+  </table>
+	<br>
+	<font style="font-size:13px;">KEGIATAN ORGANISASI & EKSTRAKURIKULER</font>
+	<table width="100%" style="border: 1px solid #DDDDDD;font-size:12px;" cellpadding="3">
+		<tr>
+		   <td align='left' >Nama Kegiatan</td>
+		   <td align='left' >Jabatan</td>
+		   <td align='left' >Tempat</td>
+		   <td align='left' >Tahun Mulai</td>
+		   <td align='left' >Tahun Selesai</td>
+		</tr>
+	 {foreach from=$organisasi item=row}
+		<tr>
+		   <td style="background-color:#F9F9F9;">{$row->namaKegiatan}</td>
+		   <td style="background-color:#F9F9F9;">{$row->jabatan}</td>
+		   <td style="background-color:#F9F9F9;">{$row->tempat}</td>
+		   <td style="background-color:#F9F9F9;">{$row->dariTahun}</td>
+		   <td style="background-color:#F9F9F9;">{$row->sampaiTahun}</td>
+		</tr>
+	 {/foreach}
+	</table>
+	<br>
+	<font style="font-size:13px;">PRESTASI ATAU PENGHARGAAN YANG PERNAH DIPEROLEH</font>
+	<table width="100%" style="border: 1px solid #DDDDDD;font-size:12px;"  cellpadding="3">
+	 <thead>
+		<tr>
+		   <th align='left' >Nama Penghargaan</th>
+		   <th align='left' >Intuisi Pemberi & Tempat</th>
+		   <th align='left' >Tahun</th>
+		</tr>
+	 </thead>
+	 <tbody>
+		<tr style="border: 1px solid #DDDDDD;">
+		{foreach name=loop from=$prestasi item=row}
+		   <td style="background-color:#F9F9F9;">{$row->namaPrestasi}</td>
+		   <td style="background-color:#F9F9F9;">{$row->namaInstitusi}</td>
+		   <td style="background-color:#F9F9F9;">{$row->tahun}</td>
+		{/foreach}
+		</tr>
+	 </tbody>
+	</table>
+	<br>
+	<font style="font-size:13px;">DATA KELUARGA</font>
+	<table width="100%" style="border: 0px solid #DDDDDD;font-size:12px;" align="left" cellpadding="5">
+	 <thead>
+			<tr >
+			   <td colspan="2" align="left"><h5>AYAH/WALI</h5></td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td widtd="20%">Nama Ayah/Wali</td>
+			   <td>{$ortu->ayahNama}{$ortu->waliNama}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Email Ayah/Wali</td>
+			   <td>{$ortu->ayahEmail}{$ortu->waliEmail}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Alamat Rumah</td>
+			   <td>{$ortu->ayahAlamat}, {$ortu->ayahPropNama}, {$ortu->ayahKodePosNama}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Kontak</td>
+			   <td><b>Telp</b> : {$ortu->ayahTel} <b>Hp</b> : {$ortu->ayahCell}</td>
+			</tr>
+			<tr style="border-bottom: 1px solid #DDDDDD;">
+				<td></td>
+			</tr>	
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Nama Ibu</td>
+			   <td>{$ortu->ibuNama}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Email Ibu</td>
+			   <td>{$ortu->ibuEmail}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Alamat Rumah</td>
+			   <td>{$ortu->ibuAlamat}, {$ortu->ibuPropNama}, {$ortu->ibuKodePosNama}</td>
+			</tr>
+			<tr style="border: 1px solid #DDDDDD; background-color:#F9F9F9;">
+			   <td>Kontak</td>
+			   <td><b>Telp</b> : {$ortu->ibuTel} <b>Hp</b> : {$ortu->ibuCell}</td>
+			</tr>
+		 </thead>
+	</table>
+	<br>
+	<font style="font-size:13px;">SAUDARA YANG PERNAH/SEDANG BERKULIAH DI UNIVERSITAS PARAMADINA</font>
+	<table width="100%" style="border: 1px solid #DDDDDD;font-size:12px;" cellpadding="3">
+	 <thead>
+		<tr style="border: 1px solid #DDDDDD;">
+		   <th align='left' >Nama</th>
+		   <th align='left' >Program Studi</th>
+		   <th align='left' >NIM</th>
+		   <th align='left' >Tahun</th>
+		</tr>
+	 </thead>
+	 <tbody>
+	  {foreach name=loop from=$saudara item=row}
+		<tr style="border: 1px solid #DDDDDD;">
+		   <td style="background-color:#F9F9F9;">{$row->namaSaudara}</td>
+		   <td style="background-color:#F9F9F9;">{$row->prodi}</td>
+		   <td style="background-color:#F9F9F9;">{$row->nim}</td>
+		   <td style="background-color:#F9F9F9;">{$row->angkatan}</td>
+		</tr>
+	   {/foreach}
+	 </tbody>
+	</table>
+	
+</div>

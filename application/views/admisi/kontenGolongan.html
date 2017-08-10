@@ -1,0 +1,167 @@
+<div class="row">
+   <div class="col-md-12">
+      <div class="add-portfolio deafult">
+         <span>Golongan Kelas Malam, Universitas Paramadina</span>  	
+            <a class=" btn default" href="#add" data-toggle="modal" style="float:right">
+                   Tambah <i class="icon-plus"></i>
+            </a> 
+      </div>
+   </div>
+</div>
+<div class="col-md-12">
+   <!-- BEGIN EXAMPLE TABLE PORTLET-->
+  <div class="portlet box red">
+      <div class="portlet-title">
+         <div class="caption"><i class="icon-edit"></i>Tabel Golongan Kelas Malam</div>
+         <div class="tools">
+            <a href="javascript:;" class="collapse"></a>
+            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+            <a href="javascript:;" class="reload"></a>
+            <a href="javascript:;" class="remove"></a>
+         </div>
+      </div>
+      <div class="portlet-body">
+         <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+            <thead>
+               <tr>
+                  <th>Golongan</th>
+                  <th>Prodi</th>
+                  <th>SKS Sem. 1</th>
+                  <th>Jumlah Semester</th>
+                  <th>Total SKS</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+                {foreach name=loop from=$sql item=row}
+                <tr >
+                   <td>{$row.singkatan} - {$row.golongan_d3}</td>
+                   <td>{$row.prodi}</td>
+                   <td>{$row.jumlah_sks}</td>
+                   <td>{$row.jumlah_semester}</td>
+                   <td>{$row.total_sks}</td>
+                   <td>
+                        <a class="edites btn blue btn-sm" href="#editRuang" data-toggle="modal" value="{$row.id}" name="edit">Edit</a>
+                        <a class="deletes btn red btn-sm" href="#verifikasi" data-toggle="modal" value="{$row.id}" name="delete">Delete</a>
+                   </td>
+                </tr>
+                {/foreach}
+            </tbody>
+         </table>
+      </div>
+   </div> 
+   <!-- END EXAMPLE TABLE PORTLET-->
+</div>
+<div class="modal fade" id="add" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog  modal-wide">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+             <h4 class="modal-title">Tambah Setting Golongan Kelas Malam</h4>
+          </div>
+                <div class="modal-body">
+                      <div class="modal-body">
+                              <form action="{$host}admisi/golonganParalel/add" class="form-horizontal" method="post">
+                                      <div class="form-body">
+                                                <div class="form-group">
+                                                       <label  class="control-label col-md-3">Golongan Kelas Malam</label>
+                                                       <div class="col-md-9">
+                                                            <select class="form-control" id="props"  name="golongan" class="gedung">
+                                                                    {foreach name=loop from=$gol item=row} 
+                                                                            <option value="{$row.id}">{$row.golongan_d3}</option>
+                                                                    {/foreach}
+                                                            </select>
+                                                       </div>
+                                                </div>
+                                                <div class="form-group">
+                                                       <label  class="control-label col-md-3">Program Studi</label>
+                                                       <div class="col-md-9">
+                                                        <select class="form-control" id="props"  name="prodi" class="gedung">
+                                                             {foreach name=loop from=$prodi item=row} 
+                                                                 <option value="{$row.kode}">{$row.nama}</option>
+                                                             {/foreach}
+                                                         </select>
+                                                       </div>
+                                                </div>
+                                                <div class="form-group">
+                                                       <label  class="control-label col-md-3">SKS Semester 1</label>
+                                                       <div class="input-group col-md-9">
+                                                              <input type="text" class="form-control" placeholder="Jumlah SKS Semester 1" id="ruang" name="sks">
+                                                       </div>
+                                                </div>
+                                                <div class="form-group">
+                                                       <label  class="control-label col-md-3">Jumlah Semester</label>
+                                                       <div class="input-group col-md-9">
+                                                              <input type="text" class="form-control" placeholder="Jumlah Total Semester" id="ruang" name="semester">
+                                                       </div>
+                                                </div>
+                                                <div class="form-group">
+                                                       <label  class="control-label col-md-3">Total SKS</label>
+                                                       <div class="input-group col-md-9">
+                                                              <input type="text" class="form-control" placeholder="Total SKS" id="ruang" name="totalSks">
+                                                       </div>
+                                                </div>
+                                      </div>
+                                <div class="modal-footer">
+                                       <button type="button" class="btn default" data-dismiss="modal">Keluar</button>
+                                       <button type="submit" class="btn blue" id="save" value="post" name="opt"> Simpan <i class="icon-plus"></i></a>
+                                </div>
+                              </form>
+                      </div>
+              </div>
+          </div>
+       </div>
+       <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="editRuang" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-wide">
+       <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+               <h4 class="modal-title">Edit Golongan Kelas Malam</h4>
+            </div>
+            <div class="modal-body">
+                      <div id="formRuang"></id>	
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+<div id="verifikasi" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+             <h4 class="modal-title">Confirmation</h4>
+          </div>
+                                      <div id="verifikasiRuang">
+                                      </div>
+       </div>
+    </div>
+</div>
+<script>
+{literal}
+$(".edites").each(function (i, v){
+	$(this).click( function() {	
+			opt = $(this).attr("name");
+			val = $(this).attr("value");
+		$.post("{/literal}{$host}{literal}admisi/golonganParalel/edit", {'opt':opt, 'val':val},function(resp){
+			$('#formRuang').html(resp);
+		});
+	});
+});
+{/literal}
+{literal}
+$(".deletes").each(function (i, v){
+	$(this).click( function() {	
+			opt = $(this).attr("name");
+			val = $(this).attr("value");
+		$.post("{/literal}{$host}{literal}admisi/golonganParalel/delete", {'opt':opt, 'val':val},function(resp){
+			$('#verifikasiRuang').html(resp);
+		});
+	});
+});
+{/literal}
+</script>

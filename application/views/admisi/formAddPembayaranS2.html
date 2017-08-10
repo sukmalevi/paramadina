@@ -1,0 +1,115 @@
+<script type="text/javascript" src="{$host}assets/js/jquery.formatCurrency-1.4.0.js"></script>
+<form action="{$host}admisi/settingUMS2/add" class="form-horizontal" method="post">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="control-label col-md-3">Kode</label>
+            <div class="input-group col-md-6">
+                <input type="text" class="form-control" placeholder="Kode[Automatic]" id="kode" name="kode" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Periode</label>
+            <div class="col-md-8">
+                <select class="form-control" id="pseriode" name="periode" required>
+                    <option value="">-- Select Periode --</option>
+                    {foreach name=loop from=$periode item=row}
+                    <option value="{$row->kode}">{$row->nama}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Program Studi</label>
+            <div class="col-md-8">
+                <select class="form-control" id="prodi" name="prodi" required>
+                    <option value="">-- Select Prodi --</option>
+                    {foreach from=$prodi item=row}
+                    <option value="{$row.kode}">{$row.nama}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Nama Pembayaran</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" placeholder="Nama Pembayaran" id="nama" name="nama" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Uang Masuk</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="biaya form-control" placeholder="Uang Masuk (Rp.)" id="um" name="um">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Biaya SPP Semester</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="biaya form-control" placeholder="Biaya SPP (Rp.)" id="spp" name="spp">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Biaya Per SKS</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" placeholder="Biaya Per SKS (Rp.)" id="sks" name="biaya_sks">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Jumlah Semester</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" placeholder="Jumlah Semester Perkuliahn" id="jumlahSem" name="jumlahSem">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Total Jumlah SKS</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" placeholder="Jumlah SKS" id="totalSks" name="totalSks">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Jumlah SKS Semester 1</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" placeholder="Jumlah SKS Semester pertama" id="jumlahSksSem1" name="jumlahSksSem1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Tanggal Jatuh Tempo</label>
+            <div class="input-group col-md-4">
+                <input type="text" class="form-control" placeholder="Due Date 1 (DD-MM-YYYY)" id="dueDate1" name="dueDate1">
+            </div>
+            <div class="input-group col-md-4">
+                <input type="text" class="form-control" placeholder="Due Date 2 (DD-MM-YYYY)" id="dueDate2" name="dueDate2">
+            </div>
+        </div>
+        <h4>Biaya SKS Fellowship Semester 1</h4>        
+        <div class="form-group">
+            <label class="control-label col-md-3">Biaya SKS Sem. 1 Fellowship 25%</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="biaya form-control" placeholder="Biaya SKS Sem. 1 Fellowship 25% (Rp.)" id="sks" name="sksF25">
+            </div>
+        </div>      
+        <div class="form-group">
+            <label class="control-label col-md-3">Biaya SKS Sem. 1 Fellowship 50%</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="biaya form-control" placeholder="Biaya SKS Sem. 1 Fellowship 50% (Rp.)" id="sks" name="sksF50">
+            </div>
+        </div>      
+        <div class="form-group">
+            <label class="control-label col-md-3">Biaya SKS Sem. 1 Fellowship 75%</label>
+            <div class="input-group col-md-8">
+                <input type="text" class="biaya form-control" placeholder="Biaya SKS Sem. 1 Fellowship 75% (Rp.)" id="sks" name="sksF75">
+            </div>
+        </div>
+    </div>    
+    <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn blue" id="save" value="save" name="opt">Simpan <i class="icon-save"></i></button>
+    </div>
+</form>
+<script type="text/javascript">
+    
+$(document).ready(function() {
+    $('.biaya').blur(function() {
+        $('.biaya').formatCurrency();
+    });
+});
+</script>

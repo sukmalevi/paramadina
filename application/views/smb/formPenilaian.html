@@ -1,0 +1,328 @@
+<div class="portlet-body form">
+    <form class="formSeleksi form-horizontal" role="form" method="post" action="#">
+    	<input type="text" value="{$hasil->kode_smb}" name="kode" hidden>
+        <input type="text" value="{$hasil->kode_jalur}" name="kode_jalur" hidden>
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3">Hadi TPA</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                            <label class="radio-inline">
+                                <input type="radio" name="tpaAda" id="tpaAda" value="1" {if $hadirUjian eq '1'}checked{/if} disabled>Hadir
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tpaAda" id="tpaAda" value="0" {if $hadirUjian eq '0'}checked{/if} disabled>Tidak Hadir 
+                            </label>
+                        {else}
+                            <label class="radio-inline">
+                                <input type="radio" name="tpaAda" id="tpaAda" value="1" {if $hadirUjian eq '1'}checked{/if}>Hadir
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tpaAda" id="tpaAda" value="0" {if $hadirUjian eq '0'}checked{/if}>Tidak Hadir
+                            </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Hadir Wawancara</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="wwAda" id="wwAda" value="1" {if $hadirWwc eq '1'}checked{/if} disabled>Hadir
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="wwAda" id="wwAda" value="0" {if $hadirWwc eq '0'}checked{/if} disabled>Tidak Hadir
+                        </label>
+                        {else}
+                        <label class="radio-inline">
+                            <input type="radio" name="wwAda" id="wwAda" value="1" {if $hadirWwc eq '1'}checked{/if}>Hadir
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="wwAda" id="wwAda" value="0" {if $hadirWwc eq '0'}checked{/if}>Tidak Hadir
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 ">Nilai TPA</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <input type="text" class="form-control" value="{$hasil->hasilUsm}" disabled>{else}
+                    <input type="text" class="form-control" value="{$hasil->hasilUsm}" name="tpa">{/if}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Nilai Wawancara</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <input type="text" class="form-control" value="{$hasil->hasilWwc}" disabled>{else}
+                    <input type="text" class="form-control" value="{$hasil->hasilWwc}" name="wawancara">
+                    {/if}
+                </div>
+            </div>
+            {if $hasil->kode_jalur neq 'KP'}
+            <div class="form-group">
+                <label class="col-md-3">Grade</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <select class="form-control" disabled>
+                        <option>-</option>
+                        <option value="1" {if $hasilAkhir eq '1'}selected{/if}>Ke-1</option>
+                        <option value="2" {if $hasilAkhir eq '2'}selected{/if}>Ke-2</option>
+                        <option value="3" {if $hasilAkhir eq '3'}selected{/if}>Ke-3</option>
+                        <option value="0" {if $hasilAkhir eq '0'}selected{/if}>Tidak Ada</option>
+                    </select>
+                    {else}
+                    <select class="form-control" name="grade">
+                        <option>-</option>
+                        <option value="1" {if $hasilAkhir eq '1'}selected{/if}>Ke-1</option>
+                        <option value="2" {if $hasilAkhir eq '2'}selected{/if}>Ke-2</option>
+                        <option value="3" {if $hasilAkhir eq '3'}selected{/if}>Ke-3</option>
+                        <option value="0" {if $hasilAkhir eq '0'}selected{/if}>Tidak Ada</option>
+                    </select>
+                    {/if}
+                </div>
+            </div>
+            {/if}
+            {if $hasil->kode_jalur eq '02'}
+            <div class="form-group">
+                <label class="col-md-3">Jumlah SKS Diterima</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <input type="text" class="form-control" value="{$hasil->sks_acc}" disabled>{else}
+                    <input type="text" class="form-control" value="{$hasil->sks_acc}" name="sks">
+                    {/if}
+                </div>
+            </div>
+            {/if}
+            
+            {if $hasil->kode_jalur eq 'KP'}
+            <div class="form-group">
+                <label class="col-md-3">Jenjang Pendidikan</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="jenjang" id="jenjang" value="SMA" {if $lulusAcc eq 'SMA'}checked{/if} disabled>SMA
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="jenjang" id="jenjang" value="D3" {if $lulusAcc eq 'D3'}checked{/if} disabled>D3
+                        </label>
+                        {else}
+                        
+                        <label class="radio-inline">
+                            <input type="radio" name="jenjang" id="jenjang" value="SMA" {if $lulusAcc eq 'SMA'}checked{/if}>SMA
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="jenjang" id="jenjang" value="D3" {if $lulusAcc eq 'D3'}checked{/if}>D3
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            
+<!--            <div class="form-group">
+                <label class="col-md-3">Jenis Lulusan</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <select class="form-control" disabled>
+                        <option>-</option>
+                        <option value="1" {if $golD3 eq '1'}selected{/if}>D3 Sejenis</option>
+                        <option value="2" {if $golD3 eq '2'}selected{/if}>D3 Serumpun</option>
+                        <option value="3" {if $golD3 eq '3'}selected{/if}>D3 Berbeda</option>
+                        <option value="4" {if $golD3 eq '4'}selected{/if}>SMA</option>
+                    </select>
+                    {else}
+                    <select class="form-control" name="golonganD3">
+                        <option value="1" {if $golD3 eq '1'}selected{/if}>D3 Sejenis</option>
+                        <option value="2" {if $golD3 eq '2'}selected{/if}>D3 Serumpun</option>
+                        <option value="3" {if $golD3 eq '3'}selected{/if}>D3 Berbeda</option>
+                        <option value="4" {if $golD3 eq '4'}selected{/if}>SMA</option>
+                    </select>
+                    {/if}
+                </div>
+            </div>-->
+            {/if}
+            {if $hasil->kode_jalur eq '10'}
+            <div class="form-group">
+                <label class="col-md-3"><i>Early Bird</i></label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="earlybird" id="earlybird" value="99" {if $earlyBird eq '99'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="earlybird" id="earlybird" value="0" {if $earlyBird eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        <label class="radio-inline">
+                            <input type="radio" name="earlybird" id="earlybird" value="99" {if $earlyBird eq '99'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="earlybird" id="earlybird" value="0" {if $earlyBird eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Alumni S1 Paramadina</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="alumni" id="jenjang" value="1" {if $alumni eq '1'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="alumni" id="jenjang" value="0" {if $alumni eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        
+                        <label class="radio-inline">
+                            <input type="radio" name="alumni" id="jenjang" value="1" {if $alumni eq '1'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="alumni" id="jenjang" value="0" {if $alumni eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Keluarga Inti Civitas Akademika</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="kelcivitas" id="jenjang" value="1" {if $kelcivitas eq '1'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="kelcivitas" id="jenjang" value="0" {if $kelcivitas eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        
+                        <label class="radio-inline">
+                            <input type="radio" name="kelcivitas" id="jenjang" value="1" {if $kelcivitas eq '1'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="kelcivitas" id="jenjang" value="0" {if $kelcivitas eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Keluarga Inti DLB</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="keldlb" id="jenjang" value="1" {if $keldlb eq '1'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="keldlb" id="jenjang" value="0" {if $keldlb eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        
+                        <label class="radio-inline">
+                            <input type="radio" name="keldlb" id="jenjang" value="1" {if $keldlb eq '1'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="keldlb" id="jenjang" value="0" {if $keldlb eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            {/if}
+            
+            <div class="form-group">
+                <label class="col-md-3">Recomended</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="recoYa" id="recoYa" value="1" {if $recomended eq '1'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recoYa" id="recoYa" value="0" {if $recomended eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        <label class="radio-inline">
+                            <input type="radio" name="recoYa" id="recoYa" value="1" {if $recomended eq '1'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recoYa" id="recoYa" value="0" {if $recomended eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Lulus</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        {if $opt eq "view"}
+                        <label class="radio-inline">
+                            <input type="radio" name="luYa" id="luYa" value="1" {if $lulusTidak eq '1'}checked{/if} disabled>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="luYa" id="luYa" value="0" {if $lulusTidak eq '0'}checked{/if} disabled>Tidak
+                        </label>
+                        {else}
+                        <label class="radio-inline">
+                            <input type="radio" name="luYa" id="luYa" value="1" {if $lulusTidak eq '1'}checked{/if}>Ya
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="luYa" id="luYa" value="0" {if $lulusTidak eq '0'}checked{/if}>Tidak
+                        </label>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-3">Keterangan</label>
+                <div class="col-md-9">
+                    {if $opt eq "view"}
+                    <textarea class="form-control" rows="2" disabled>{$hasil->ket}</textarea>
+                    {else}
+                    <textarea class="form-control" rows="2" name="ket">{$hasil->ket}</textarea>
+                    {/if}
+                </div>
+            </div>
+        </div>
+        {if $opt neq "view"}
+        <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green" id="postData">Submit</button>
+                <!--<button type="cancel" class="btnHide btn default">Cancel</button>-->
+            </div>
+        </div>
+        {/if}
+    </form>
+</div>
+
+<script>
+{literal}
+$(".formSeleksi").submit( function() {	
+		$.post("{/literal}{$host}{literal}smb/konfirmHasilSeleksi/save",$(this).serialize(),function(resp){
+		val = "{/literal}{$val}{literal}";
+			$.post("{/literal}{$host}{literal}smb/smbSeleksiForm/form",{
+				'val': val,
+				'opt': "view"
+					},function(resp){
+					$('#formPenilaian'+val).html(resp);
+				}); 
+		});
+		return false;
+		
+	});
+	
+{/literal}
+</script>

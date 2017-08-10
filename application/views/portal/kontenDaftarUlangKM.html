@@ -1,0 +1,178 @@
+<script type="text/javascript" src="{$host}assets/js/jquery.formatCurrency-1.4.0.js"></script>
+<!-- BEGIN FORM-->
+<div class="row">
+    <div class="col-md-12" style="padding-bottom: 15px; padding-top: 5px; padding-right: 0px;">
+
+    </div>
+</div>
+<form action="{$host}portal/confirmDaftarUlang/add" enctype="multipart/form-data" class="form-horizontal form-bordered form-row-stripped" id="form_sample_1" method="post">
+    <div class="portlet box grey">
+        <div class="portlet-body form" style="border-top: 1px double #4682B4;">
+            <div class="form-body" style="font-size:bold">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">DATA DIRI</h3>
+                <div class="form-group">
+                    <label class="control-label col-md-2" >Nama Lengkap
+                    </label>
+                    <div class="col-md-10" >
+                        <label>
+                            <h5>{$prof->nama_cm}</h5>
+                        </label>
+                        <input value="{$prof->kode_smb}" name="kode" hidden>
+                        <input value="{$prof->kode_jalur}" name="kode_jalur" hidden>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No Registrasi
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->no_smb}</h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Program Studi
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->progdi}</h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Jalur Masuk
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->n_jalur}</h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Lulusan
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$transPaid->lulus_acc}</h5>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="detailBiaya">
+            </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tanggal Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="yyyy-mm-dd">
+                            <input type="text" class="form-control" name="tanggalBayar" style="text-align: left;" placeholder="DD-MM-YYYY" required>
+                    <p class="help-block">Tanggal transaksi pembayaran</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Jenis Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control" name="typeTrans" id="typeTrans" required>
+                            <option>Pilih Tipe Pembayaran..</option>
+                            {foreach name=loop from=$typeBayar item=row}
+                            <option value="{$row->kode}">{$row->nama}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No Kartu ATM
+                    </label>
+                    <div class="col-md-10">
+                        <input type="number" class="form-control" name="noAtmCard" id="noAtmCard" maxlength="16" disabled required>
+                        <p class="help-block" style="display:none;" id="helpAtm">Masukan 16 digit No. kartu ATM Anda</p>
+                        <p class="help-block" style="display:none;" id="helpAtmno">Lewati jika transaksi pembayaran Tunai/Tunai Via Bank</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Rekening Tujuan
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h4>{$bankAkun->nama}</h4>
+                        </label>
+                        <input value="{$bankAkun->kode}" name="bankAkun" hidden>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No. Rek. Pengirim
+                    </label>
+                    <div class="col-md-10">
+                        <input type="number" class="form-control" name="no_rek_cmb" id="no_rek_cmb" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nama Rek. Pengirim
+                    </label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="nama_rek_cmb" id="nama_rek_cmb" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Bukti Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <input type="file" id="bukti" name="bukti" required>
+                        <p class="help-block">Format : pdf|jpg|png|gif</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark" data-dismiss="modal" onClick="window.history.back();"><i class=" icon-chevron-left"></i> Back</button>
+                    <button type="submit" class="btn green" id="save" value="save" name="opt">Save <i class="icon-ok"></i>
+                    </button>
+                </div>
+        </div>
+    </div>
+</form>
+<script>
+$(document).ready(function() {
+    $('.biaya').formatCurrency();
+{literal}	
+    
+    opt = $('.mBayar').attr("name");
+    val = $('.mBayar').attr("value");
+    sau = $('#sau').attr("value");
+
+    $.post("{/literal}{$host}{literal}portal/detailPayment", {'opt':opt, 'val':69, 'sau':sau},function(resp){
+            $('.detailBiaya').html(resp);
+    });
+});
+
+$('.biaya').blur(function(){
+    $('.biaya').formatCurrency();
+});
+
+{/literal}
+{literal}
+$("#typeTrans").change(function(){	
+	val = $(this).val();
+	//alert (val);
+	if (val == '04.2' || val == '04.4'){
+		document.getElementById('helpAtmno').style.display = 'none';
+		document.getElementById('helpAtm').style.display = 'block';
+		$("#noAtmCard").prop('disabled', false);
+	}else{
+		document.getElementById('helpAtmno').style.display = 'block';
+		document.getElementById('helpAtm').style.display = 'none';
+		$("#noAtmCard").prop('disabled', true);
+	}
+	if (val == '04.3'){
+		$("#no_rek_cmb").prop('required', false);
+		$("#nama_rek_cmb").prop('required', false);
+		$("#bukti").prop('required', false);
+	}else{
+		$("#no_rek_cmb").prop('required', true);
+		$("#nama_rek_cmb").prop('required', true);
+		$("#bukti").prop('required', true);
+	}
+});	
+{/literal}
+</script>

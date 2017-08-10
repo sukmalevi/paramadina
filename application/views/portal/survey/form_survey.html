@@ -1,0 +1,71 @@
+<!--<div class="row">-->
+  <div class="col-md-12 article-block">
+    <hr style='margin-top: -10px; margin-bottom: 10px;'>       
+        <div class='col-md-12' style='text-align: center;'>
+            <img src="{$host}assets/img/logoupm.png"><br>
+			<h4 style='text-align: center;'>{$title}</h4>
+        </div>
+         
+        <div class='clearfix'></div>
+        <hr style='margin-top: 0px;'> 
+        <div class="well">
+            <address>
+                <label>
+					Yang kami hormati calon mahasiswa Universitas Paramadina,<br><br>
+					Kami sedang menjalankan survey terhadap program Admission Online (pendaftaran mahasiswa baru) Universitas Paramadina (UPM). 
+					Kami berharap anda berpartisipasi pada survey ini dengan cara: <br><br>
+					
+					<font style="margin-left:25px;">	"Berikan skor angka 1 - 5 pada setiap pernyataan yang ada dengan kriteria"</font><br>
+					<font style="margin-left:25px;">	1 = sangat tidak setuju;</font> <br>
+					<font style="margin-left:25px;">	2 = tidak setuju;</font> <br>
+					<font style="margin-left:25px;">	3 = cukup setuju;</font> <br>
+					<font style="margin-left:25px;">	4 = setuju;</font><br>
+					<font style="margin-left:25px;">	5 = sangat setuju.</font><br><br>
+
+					Atas partisipasi anda kami sampaikan terimakasih.<br><br><br>
+					Salam<br><br>
+					Panitia Penerimaan Mahasiswa Baru Universitas Paramadina<br><br>
+
+				</label>
+
+                 <form action="{$host}" class="form-horizontal" method="post">
+					<div class="portlet box default">
+						<div class="portlet-body form" style="border-top: 1px double #EFEFEF;">
+							<div class="form-body">		
+								<div class="col-md-12">
+								{foreach from=$quest key=k item=row}
+									<div class="form-group">
+										<div class="col-md-7">
+											<label class="control-label">{$k+1}. {$row.pertanyaan}</label>
+										</div>
+										<div class="col-md-5">
+											{if $row.tipe_pertanyaan eq 1}
+											<div class="radio-list">
+												{foreach from=$kriteria item=ans key=i}		
+												<label class="radio-inline">
+												<input type="radio" name="optionsRadios{$row.id}" id="optionsRadios{$i}" value="option{$i}"> {$ans.id}
+												</label>
+												{/foreach}
+											</div>
+											{elseif $row.tipe_pertanyaan eq 2}
+											<textarea  class="form-control" rows="3" placeholder="Masukan Anda..."></textarea>
+											{/if}
+										</div>
+									</div>
+								{/foreach}
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+            </address>
+        </div>
+    
+     <br><br>
+     <hr>
+     <h4>Panitia Penerimaan Baru Mahasiswa 2016</h4>
+     <h5>Telepon: +62-21-7918-1188 ext 200/888, leo.ericton@paramadina.ac.id, http://paramadina.ac.id</h5>
+     <h5>PIN BB 28249c59   |   Line ID ParamadinaUniversity    |    @paramadina    |    facebook.com/paramadina   |  SMS : 0815 918 1188</h5>
+  </div>
+  <!--end col-md-9-->
+<!--</div>-->

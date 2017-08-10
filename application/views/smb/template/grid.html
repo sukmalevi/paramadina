@@ -1,0 +1,67 @@
+<style type="text/css">
+	.datagrid-row-over td{
+		background:#D0E5F5;
+	}
+	.datagrid-row-selected td{
+		background:#FBEC88;
+		color:#000;
+	}
+</style>
+
+	
+<div id="div_{$tipe_grid}" style="width:100%">
+	<div id='{$tipe_grid}'></div>
+	<div id='toolbar_{$tipe_grid}' style='padding:5px;height:45px'>	            
+		{if $tipe_grid eq 'cmb'}
+		<div class="col-md-12">
+			<div class="col-md-4" >
+				<select class="form-control" name="periode" id="periode" onchange="doSelect('{$tipe_grid}', '', '')">
+					{foreach name=lope from=$periode item=row}
+					<option value="{$row->kode}">{$row->nama}</option>
+					{/foreach}
+				</select>
+			</div>
+			<div class="col-md-3" >
+				<select class="form-control" name="jalur" id="jalur" onchange="doSelect('{$tipe_grid}', '', '')">
+					<option value="all">Semua Jalur</option>
+					{foreach name=lope from=$jalur item=row}
+					<option value="{$row->kode}">{$row->nama}</option>
+					{/foreach}
+				</select>
+			</div>
+			<div class="col-md-3" >
+				<select class="form-control" name="prodi" id="prodi" onchange="doSelect('{$tipe_grid}', '', '')">
+					<option value="all">Semua Prodi</option>
+					{foreach name=lope from=$prodi item=row}
+					<option value="{$row->kode}">{$row->nama}</option>
+					{/foreach}
+				</select>
+			</div>
+			<div class="col-md-2" >
+				<input id="nama" class="form-control" placeholder="Search..." style="line-height:26px;border:1px solid #ccc" onchange="doSearch('{$tipe_grid}', '', '')">
+				<!-- <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch('{$tipe_grid}', '', '')">Search</a> -->
+			</div>
+		</div>
+		{/if}	           
+	</div>
+</div>
+<br>
+<div id="btnDownload">
+	<a href="{$host}smb/exportToExcel/calonSmb/" id ="downloadLink" class="btn default  black" style="margin-bottom: 12px;"><i class="icon-download-alt"></i> Download Laporan</a>
+</div>
+<script>
+	$('#div_{$tipe_grid}').css('height',(getClientHeight()));
+	genGrid('{$tipe_grid}', '', '', '{$p1}', '{$p2}');
+	
+{literal}	
+	$("#periode,#jalur,#prodi").change(function(e){
+		e.preventDefault();
+		var periode = $('#periode').val();
+		var jalur = $('#jalur').val();
+		var prodi = $('#prodi').val();
+		var downLink = '{/literal}{$host}{literal}smb/exportToExcel/calonSmb/'+periode+'/'+prodi+'/'+jalur;
+		<!-- alert(downLink); -->
+		$("a[href='{/literal}{$host}{literal}smb/exportToExcel/calonSmb/']").prop("href", downLink);
+	});
+{/literal}
+</script>

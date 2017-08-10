@@ -1,0 +1,459 @@
+<script type="text/javascript" src="{$host}assets/js/jquery.formatCurrency-1.4.0.js"></script>
+<!-- BEGIN FORM-->
+<form action="#" enctype="multipart/form-data" class="form-horizontal form-bordered form-row-stripped" id="form_sample_1" method="#">
+    <div class="portlet box grey">
+        <div class="portlet-body form" style="border-top: 1px double #4682B4;">
+            <div class="form-body" style="font-size:bold">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">DATA DIRI</h3>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nama Lengkap
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->nama_cm}</h5>
+                        </label>
+                        <input value="{$prof->kode_smb}" name="kode" hidden>
+                        <input value="{$prof->kode_jalur}" name="kode_jalur" hidden>
+                        <input value="{$nama}" name="nama_operator" hidden>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No Registrasi
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->no_smb}</h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Program Studi
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->progdi}</h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Jalur Masuk
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$prof->n_jalur}</h5>
+                        </label>
+                    </div>
+                </div>
+                {if $jalur neq 'KP'}
+                <div class="form-group">
+                    <label class="control-label col-md-2">Ranking Masuk
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{if $prof->stsResultGrade eq '1'}Pertama{else if $prof->stsResultGrade eq '2'}Kedua{else}Ketiga{/if}</h5>
+                        </label>
+                    </div>
+                </div>
+                {/if}
+                {if $jalur eq 'KP'}
+                <div class="form-group">
+                    <label class="control-label col-md-2">Jenjang Masuk
+                    </label>
+                    <div class="col-md-10">
+                        <label>
+                            <h5>{$transPaid->lulus_acc}</h5>
+                        </label>
+                    </div>
+                </div>
+                {/if}
+            </div>
+            <div class="form-body">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Transaksi Pembayaran</h3>
+                {if $jalur neq 'KP'}
+                <div class="form-group">
+                    <label class="control-label col-md-2">Metode Pembayaran
+                    </label>
+                    <div class="col-md-3">
+                        {if $jalur neq 'KP'}
+                        <div class="checkbox-list">
+                            <label>
+                                {if $saudara gt 0}
+                                <input type="checkbox" name="yes" checked="true" disabled>Memiliki Saudara Kandung
+                                <input name="sau" id="sau" value="1" hidden>{else if $saudara eq 0}
+                                <input type="checkbox" name="no" disabled>Memiliki Saudara Kandung
+                                <input name="sau" id="sau" value="0" hidden>{/if}
+                            </label>
+                        </div>
+                        {/if} {if $method eq '1'}
+                        <div class="radio-list">
+                            <label>
+                                <input type="radio" name="metodBayar" class="mBayar" value="1" checked="true" disabled>Pembayaran Lunas
+                            </label>
+                            <label>
+                                <input type="radio" name="metodBayar" class="mBayar" value="0" disabled>Pembayaran Angsuran
+                            </label>
+                        </div>
+                        {else}
+                        <div class="radio-list">
+                            <label>
+                                <input type="radio" name="metodBayar" class="mBayar" value="1" disabled>Pembayaran Lunas
+                            </label>
+                            <label>
+                                <input type="radio" name="metodBayar" class="mBayar" value="0" checked="true" disabled>Pembayaran Angsuran
+                            </label>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+                {/if}
+                <div class="form-group">
+                    <label class="control-label col-md-2">Rincian Biaya</label>
+                    <div class="detailBiaya col-md-10">
+                        {if $method eq '1'}						
+                        <a class="man list-group-item">
+                            <label class="col-md-4">Uang Masuk</label>
+                            <label>
+                                : Rp
+                                <font class="biaya">{$uangMasuk}</font>
+
+                            </label>
+                        </a>
+                        {else}
+                        <a class="man list-group-item">
+                            <label class="col-md-4">Uang Masuk</label>
+                            <label >
+                                    : Rp <font class="biaya">{$uangMasuk}</font> 
+                                    {if $jalur neq 'KP'}<small>( {$biaya->tempoAngsuran} X Angsuran )</small>{/if}
+                            </label>
+                        </a>
+                        {/if}
+                        <a class="man list-group-item">
+                                <label class="col-md-4">SPP {if $jalur neq 'KP'}Semester 1{/if}</label>
+                                <label>: Rp <font class="biaya">{$biaya->spp}</font></label>
+                        </a>
+                        {if $jalur neq 'KP'}
+                        <a class="man list-group-item">
+                                <label class="col-md-4">
+                                        SKS Semester 1
+                                </label>
+                                <label>
+                                        : Rp
+                                        <font class="biaya">{$biaya->sks}</font> ({$biaya->jumlahSks} x Rp <font class="biaya">{$biaya->sks/$biaya->jumlahSks}</font>)
+                                </label>
+                        </a>
+                        {else}
+                        <a class="man list-group-item">
+                                <label class="col-md-4">
+                                        SKS
+                                </label>
+                                <label>
+                                        : Rp
+                                        <font class="biaya">{$biaya->biayaPerSks*$biaya->jumlahSks}</font> ({$biaya->jumlahSks} x Rp <font class="">{$biaya->biayaPerSks|number_format:0:",":"."}</font>)
+                                </label>
+                        </a>
+                        {/if}
+						
+                        <a class="man list-group-item">
+                                <label  class="col-md-4">
+                                        Biaya Orientasi (BPP)
+                                </label>
+                                <label >
+                                        : Rp
+                                                <font class="biaya">{$biaya->bpp}</font>
+                                </label>
+                        </a>
+                {if $jalur neq 'KP'}
+                    {if $method eq '1'}                        
+                        <a class="man list-group-item">
+                                <label class="col-md-4">
+                                        Potongan 
+                                </label>
+                                <label>
+                                    {if $prodi neq '1204'} 
+                                            {if $jalur eq '01' or $jalur eq '02'} 
+                                                {if $earlyBird neq '99'}
+                                                : Rp <font class="biaya">1000000</font> (Lunas)
+                                                {else}
+                                                : Rp <font class="biaya">{$uangMasuk*0.3}</font> <i>(30%, Early Bird)</i>
+                                                {/if}
+                                                
+                                                {if $saudara gt '0'} 
+                                                        + Rp <font class="biaya">{$diskonSau}</font> (20%, Saudara)
+                                                {/if}
+                                                {if $jalur eq '02'}
+                                                        + Rp <font class="biaya">
+                                                        {if $transPaid->sks_acc lt 40} {$uangMasuk*0}
+                                                        {else if $transPaid->sks_acc gt 40 && $transPaid->sks_acc le 80} {($uangMasuk-$diskonSau)*(25/100)}
+                                                        {else if $transPaid->sks_acc gt 80} {($uangMasuk-$diskonSau)*(50/100)}{/if}</font> 
+                                                        ({$transPaid->sks_acc} SKS diterima)
+
+                                                {/if}
+                                            {else} 
+                                            : - 
+                                            {/if}
+                                    {else} 
+                                    : - 
+                                    {/if}
+
+                                </label>
+                        </a>
+                    {else}                        
+                        <a class="man list-group-item">
+                                <label class="col-md-4">
+                                        Potongan
+                                </label>
+                                <label>
+                                    {if $prodi neq '1204'}
+                                            {if $saudara gt '0'} : Rp
+                                            <font class="biaya">{$diskonSau} </font> (20%, Saudara) 
+                                            {/if}
+                                            {if $jalur eq '02'}
+                                             + Rp <font class="biaya">
+                                                    {if $transPaid->sks_acc lt 40} {$uangMasuk*0}
+                                                    {else if $transPaid->sks_acc gt 40 && $transPaid->sks_acc le 80} {($uangMasuk-$diskonSau)*(25/100)}
+                                                    {else if $transPaid->sks_acc gt 80} {($uangMasuk-$diskonSau)*(50/100)}
+                                                    {/if}
+                                                    </font> ({$transPaid->sks_acc} SKS diterima)
+                                            {/if}
+                                    {else}
+                                    : -
+                                    {/if}
+                                    {if $jalur eq 'KP'}: -{/if}
+                                </label>
+                        </a>
+                    {/if}
+                {/if}
+                        <hr>
+                    {if $method eq '1'}						
+                        <a class="man list-group-item">
+                                <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">Total Biaya Keseluruhan</label>
+                                <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{$total}</font> </label>
+                        </a>
+                        <input type="text" name="totalDaftarUlang" value="{$total}" hidden>
+                    {else}
+                        {if $jalur neq 'KP'}
+                        <a class="man list-group-item">
+                                <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">Total Pembayaran Daftar Ulang</label>
+                                <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{$total}</font></label>
+                        </a>
+                        {/if}
+                        <a class="man list-group-item">
+                                <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">
+                                    {if $jalur eq 'KP'}Total Biaya Perkuliahan{else}Total yang harus dibayar{/if}
+                                </label>
+                                <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{if $jalur eq 'KP'}{$total}{else}{$totalAll-$angsuran.angsuran1}{/if}</font></label>
+                        </a>
+
+                        <input type="text" name="totalDaftarUlang" value="{$total}" hidden>
+                    </div>
+                </div>
+            </div>
+            {if $jalur eq 'KP'}            
+            <div class="form-group">    
+                <label class="control-label col-md-2">Pilihan Biaya Daftar Ulang
+                </label>
+                <div class="col-md-10">
+                    <div class="radio-list">
+                        <label>
+                        {foreach from=$pilihanBiaya item=val name=pilihan key=k}                                
+                            <input type="radio" name="pilihDU" class="pilihDU" value="{$val}" {if $val eq $transPaid->reapplyBankTransferAmount}checked{/if} disabled> Rp. {$val|number_format:0:",":"."} 
+                        {/foreach}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {/if}
+            <div class="form-body">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Detail Angsuran Uang Masuk</h3>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Rincian Angsuran</label>    
+                        <div class="col-md-10">
+                        {if $jalur neq 'KP'}   
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-1 </label>
+                                    <label>: Rp <font class=" biaya">{$angsuran.angsuran1}</font></label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date1|date_format:"%e %b %Y"}</label>
+                            </a>
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-2 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {if $angsuran.angsuran3 < 0}{$angsuran.angsuran2 + $angsuran.angsuran3}
+                                            {else}{$angsuran.angsuran2}{/if}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date2|date_format:"%e %b %Y"}</label>
+                            </a>
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-3 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {if $angsuran.angsuran3 < 0}{$angsuran.angsuran3}-{$angsuran.angsuran3}
+                                            {else}{$angsuran.angsuran3}{/if}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date3|date_format:"%e %b %Y"}</label>
+                            </a>
+                        {else}
+                            {foreach from=$sql item=row key=k}                           
+                                <table  class='table table-bordered  table-advance '>
+                                    <thead>
+                                        <tr>
+                                            <th><h5>Pilihan Uang Masuk</h5></th>
+                                            {foreach from=$row.pilihanBiayaUM key=k item=rows}
+                                            <th class=''><h5>{if $rows eq $choose}<b>{$rows|number_format:0:",":"."}</b>{else}{$rows|number_format:0:",":"."}{/if}</h5></th>
+                                            {/foreach}
+                                            <th><h5>Bulan Ke - </h5></th>
+                                            <th><h5>Tanggal Jatuh Tempo</h5></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><h5>Angsuran Bulanan ({$row.tempoAngsuran - 1} X)</h5></td>    
+                                            {foreach from=$pilih item=rowd key=k name=foo}   
+                                            <td class='{if $k eq $keypilih}active{/if}'>
+                                                {foreach from=$rowd item=val}
+                                                {$val|number_format:0:",":"."}<br>
+                                                {/foreach}
+                                            </td>
+                                            {/foreach}
+                                            <td  rowspan='2'>
+                                                {foreach from=$resTglTempo item=val name=ke key=y}
+                                                {if $smarty.foreach.ke.last}
+                                                   <br><br> Ke - {$y+1}
+                                                {else}
+                                                    Ke - {$y+1}<br>
+                                                {/if}
+                                                {/foreach}
+                                            </td>
+                                            <td  rowspan='2'>
+                                                {foreach from=$resTglTempo item=val name=tgl}
+                                                {if $smarty.foreach.tgl.last}
+                                                    <br><br>{$val|date_format:'%d-%m-%Y'}
+                                                {else}
+                                                    {$val|date_format:'%d-%m-%Y'}<br>
+                                                {/if}
+                                                {/foreach}
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <td>Angsuran Terakhir (1 X)</td>
+                                            {foreach from=$row.biayaPembeda key=k item=rows}
+                                            <td class='{if $k eq $keypilih}active{/if}'>{$rows|number_format:0:",":"."}</td>
+                                            {/foreach}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {/foreach}
+                        {/if}
+                            <br>
+                    {/if}
+                        <br> 
+                        {if $jalur neq 'KP'}                      
+                            <a class="man list-group-item">
+                                <label>Total Uang Masuk</label>
+                                <label style="float:right">Rp <font class="biaya">
+                                    {$totalUangMasuk}</font></label>
+                            </a>
+                        {/if}
+                    </div>
+                    </div>
+            </div>
+            
+            <div class="form-body">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Detail Transaksi</h3>
+				<div class="form-group">
+                    <label class="control-label col-md-2">Jumlah Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <h5>Rp
+                                <font class="biaya">{$transPaid->reapplyBankTransferAmount}</font>
+                        </h5>
+                    </div>
+                </div>
+				{if $jalur eq '01' || $jalur eq '02' || $jalur eq 'KP' || $jalur eq 'JP'}
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tanggal Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <h5>{$transPaid->tanggal_trans|date_format:"%e - %m - %Y"}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Jenis Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                       <h5>{$transPaid->typeTrans}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No Kartu ATM
+                    </label>
+                    <div class="col-md-10">
+                        <h5>{$transPaid->noAtmCardPendaftaran}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Rekening Tujuan
+                    </label>
+                    <div class="col-md-9">
+                        <label>
+                            <h4>{$bankAkun->nama}</h4>
+                        </label>
+                        <input value="{$bankAkun->kode}" name="bankAkun" hidden>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">No. Rek. Pengirim
+                    </label>
+                    <div class="col-md-10">
+                        <h5>{$transPaid->noRekPengirimDaftarUlang}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nama Rek. Pengirim
+                    </label>
+                    <div class="col-md-10">
+                        <h5>{$transPaid->namaRekPengirimDaftarUlang}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Bukti Pembayaran
+                    </label>
+                    <div class="col-md-10">
+                        <a href="{$host}/assets/upload/bukti_bayar/{$transPaid->buktiBayarDaftarUlang}" class="btn default">{$transPaid->buktiBayarDaftarUlang} <i class=" icon-eye-open"></i> </a>
+                    </div>
+                </div>
+				{/if}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+$(document).ready(function() {
+    $('.biaya').formatCurrency();
+});
+
+{literal}
+$("#typeTrans").change(function(){	
+	val = $(this).val();
+	//alert (val);
+	if (val == '04.2' || val == '04.4'){
+		document.getElementById('helpAtmno').style.display = 'none';
+		document.getElementById('helpAtm').style.display = 'block';
+		$("#noAtmCard").prop('disabled', false);
+	}else{
+		document.getElementById('helpAtmno').style.display = 'block';
+		document.getElementById('helpAtm').style.display = 'none';
+		$("#noAtmCard").prop('disabled', true);
+	}
+	if (val == '04.3'){
+		$("#no_rek_cmb").prop('required', false);
+		$("#nama_rek_cmb").prop('required', false);
+		$("#bukti").prop('required', false);
+	}else{
+		$("#no_rek_cmb").prop('required', true);
+		$("#nama_rek_cmb").prop('required', true);
+		$("#bukti").prop('required', true);
+	}
+});	
+{/literal}
+</script>

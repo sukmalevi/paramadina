@@ -1,0 +1,242 @@
+<script type="text/javascript" src="{$host}assets/js/jquery.formatCurrency-1.4.0.js"></script>
+	<div class="form-group">    
+		<label class="control-label col-md-2">Rincian Biaya</label>
+			<div class="col-md-10">
+				{if $method eq '1'}						
+				<a class="man list-group-item">
+					<label class="col-md-4">Uang Masuk </label>
+					<label>: Rp <font class="biaya">{$uangMasuk}</font></label>
+				</a>
+				{else}
+				<a class="man list-group-item">
+					<label class="col-md-4">Uang Masuk</label>
+					<label > : Rp <font class="biaya">{$uangMasuk}</font> </label>
+				</a>
+				{/if}
+				<a class="man list-group-item">
+					<label class="col-md-4">SPP Semester {if $jalur eq '01' or $method eq '69'}1{/if}</label>
+					<label>: Rp <font class="biaya">{$biaya->spp}</font></label>
+				</a>
+				<a class="man list-group-item">
+					<label class="col-md-4">
+							SKS Semester {if $jalur eq '01' or $method eq '69'}1{/if}
+					</label>
+					<label>: Rp 
+						<font class="biaya">{$biaya->sks}</font> ({$biaya->jumlahSks} x Rp <font class="biaya">{$biaya->sks/$biaya->jumlahSks}</font>)
+					</label>
+				</a>
+				<a class="man list-group-item">
+						<label  class="col-md-4">Biaya Orientasi (BPP)</label>
+						<label >
+								: Rp <font class="biaya">{$biaya->bpp}</font>
+						</label>
+				</a>
+                    {if $method eq '1'}                        
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">
+                                            Potongan<br>
+                                    </label>
+                                    <label>
+
+                                        {if $prodi neq '1204'} 
+                                                {if $jalur eq '01' or $jalur eq '02'} 
+                                                    {if $earlyBird neq '99'}
+                                                    : Rp <font class="biaya">1000000</font> (Lunas)
+                                                    {else}
+                                                    : Rp <font class="biaya">{$uangMasuk*0.3}</font> <i>(30%, Early Bird)</i>
+                                                    {/if}
+                                                    
+                                                    {if $saudara gt '0'} 
+                                                            + Rp <font class="biaya">{$diskonSau}</font> (20%, Saudara)
+                                                    {/if}
+                                                    {if $jalur eq '02'}
+                                                            + Rp <font class="biaya">
+                                                            {if $transPaid->sks_acc lt 40} {$uangMasuk*0}
+                                                            {else if $transPaid->sks_acc gt 40 && $transPaid->sks_acc le 80} {($uangMasuk-$diskonSau)*(25/100)}
+                                                            {else if $transPaid->sks_acc gt 80} {($uangMasuk-$diskonSau)*(50/100)}{/if}</font> 
+                                                            ({$transPaid->sks_acc} SKS diterima)
+
+                                                    {/if}
+                                                {else}                                                
+                                                    {if $jalur eq 'KP'}
+                                                        : Rp <font class="biaya">1000000</font> (Lunas)
+                                                    {else}
+                                                        : - 
+                                                    {/if}
+                                                {/if}
+                                        {else} 
+                                        : - 
+                                        {/if}
+
+                                    </label>
+                            </a>
+                    {else}                        
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">
+                                            Potongan
+                                    </label>
+                                    <label>
+                                    {if $prodi neq '1204'}
+                                                {if $saudara gt '0'} : Rp
+                                                <font class="biaya">{$diskonSau} </font> (20%, Saudara) 
+                                                {/if}
+                                                {if $jalur eq '02'}
+                                                 : Rp <font class="biaya">
+                                                        {if $transPaid->sks_acc lt 40} {$uangMasuk*0}
+                                                        {else if $transPaid->sks_acc gt 40 && $transPaid->sks_acc le 80} {($uangMasuk-$diskonSau)*(25/100)}
+                                                        {else if $transPaid->sks_acc gt 80} {($uangMasuk-$diskonSau)*(50/100)}
+                                                        {/if}
+                                                        </font> ({$transPaid->sks_acc} SKS diterima)
+                                                {/if}
+                                    {else}
+                                    : -
+                                    {/if}
+
+                                    </label>
+                            </a>
+                    {/if}
+                            <hr>
+                    {if $method eq '1'}						
+                            <a class="man list-group-item">
+                                    <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">Total Biaya Keseluruhan</label>
+                                    <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{$total}</font> </label>
+                            </a>
+                            <input type="text" name="totalDaftarUlang" value="{$total}" hidden>
+                    {else}
+
+                            <a class="man list-group-item">
+                                    <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">Total Pembayaran Semester 1</label>
+                                    <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{$total}</font></label>
+                            </a>
+<!--                            <a class="man list-group-item">
+                                    <label class="col-md-4" style="font-size:16px;font-family: Arial,sans-serif;">Total yang harus dibayar</label>
+                                    <label style="font-size:16px;font-family: Arial,sans-serif;">: Rp <font class="biaya">{$totalAll}</font></label>
+                            </a>-->
+
+                            <input type="text" name="totalDaftarUlang" value="{$total}" hidden>
+                    </div>
+                </div>
+            <div class="form-body">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Detail Angsuran {if $jalur eq 'KP'}Semester 1{else}Uang Masuk{/if}</h3>
+                    <div class="form-group">
+                            <label class="control-label col-md-2">Rincian Biaya
+                            </label>
+                        <div class="col-md-10">
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-1 </label>
+                                    <label>: Rp <font class=" biaya">{$angsuran1}</font></label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date1|date_format:"%e %b %Y"}</label>
+                            </a>
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-2 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$angsuran2}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date2|date_format:"%e %b %Y"}</label>
+                            </a>
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-3 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$angsuran3}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date3|date_format:"%e %b %Y"}</label>
+                            </a>
+                            {if $jalur eq 'KP'} 
+                                                                
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-4 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$biaya->angsuran4}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date4|date_format:"%e %b %Y"}</label>
+                            </a>
+                               
+                            
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-5 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$biaya->angsuran5}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date5|date_format:"%e %b %Y"}</label>
+                            </a>
+                            {if $prodi eq '1208' && $grade eq 'SMA'}
+                            
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-6 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$biaya->angsuran6}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date4|date_format:"%e %b %Y"}</label>
+                            </a>
+                            
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-7 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$biaya->angsuran7}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date4|date_format:"%e %b %Y"}</label>
+                            </a>
+                            
+                            <a class="man list-group-item">
+                                    <label class="col-md-4">Angsuran Ke-8 </label>
+                                    <label>: Rp <font class="biaya">
+                                            {$biaya->angsuran8}</font>
+                                    </label>
+                                    <label style="float:right">Jatuh Tempo : {$biaya->due_date4|date_format:"%e %b %Y"}</label>
+                            </a>
+                                    
+                            {/if} 
+                            {/if}
+                        <br>
+                        <br>                       
+                        <a class="man list-group-item">
+                            <label>{if $jalur eq 'KP'}Jumlah Pembayaran{else}Total Uang Masuk{/if}</label>
+                            <label style="float:right">
+                                Rp <font class="biaya">{if $jalur eq 'KP'}{$angsuran1}{else}{$totalUangMasuk}{/if}</font>
+                            </label>
+                        </a>
+                        {*
+                        {if $jalur neq 'KP'}
+                        <a class="man list-group-item">
+                                <label>Sisa Angsuran</label>
+                                <label style="float:right">Rp <font class="biaya">{$sisaAng}</font></label>
+                        </a>
+                        {/if}
+                        *}
+                    </div>
+                {/if}
+                </div>
+            </div>
+            
+            <input type="hidden" name='angsuran1' value='{$angsuran1}'>
+            <input type="hidden" name='angsuran2' value='{$angsuran2}'>
+            <input type="hidden" name='angsuran3' value='{$angsuran3}'>
+            
+            <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Detail Transaksi</h3>
+            <div class="form-group">
+                <label class="control-label col-md-2">Jumlah Pembayaran
+                </label>
+                <div class="col-md-9">
+                    <input type="text" class="biaya form-control" name="jumlahBayar" id="jumlahBayar" 
+                           value="
+                           {if $method eq '1'} 
+                                {$total}
+                           {else}
+                            {if $jalur eq 'KP'}
+                                {$angsuran1}
+                            {else}
+                                {$totalAll-$angsuran1}
+                            {/if}
+                           {/if}">
+                </div>
+            </div>
+<input type="text" name="kodeMetod" value="{$biaya->kode_pembayaran}" hidden>
+<script>
+$(document).ready(function(){
+    $('.biaya').formatCurrency();
+});
+
+$('.biaya').blur(function(){
+    $('.biaya').formatCurrency();
+});
+</script> 

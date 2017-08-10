@@ -1,0 +1,159 @@
+<div id="bar" style="border: 1px solid;margin-bottom: 20px;" class="hidden-print"></div>
+<div class="row col-md-2"></div>
+<div class="row col-md-8">
+    <div class="invoice  col-xs-12">
+        <div class="row invoice-logo">
+            <div class="col-xs-12 invoice-logo-space" style="text-align: center;">
+                <img src="{$host}assets/img/logop.png" alt="" height="50px"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center;">
+                <h3 class="page-title">KARTU TANDA PESERTA UJIAN</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="font-size:12px">
+            <div class="col-xs-3">
+                {if $cmb->foto eq ''}
+                <img src="{$host}assets/img/ava.png" class="img-responsive" alt="" width="150px"/>{else}
+                <img src="{$host}assets/upload/foto/{$cmb->foto}" style="border:5px solid #E6E2EB" alt="" width="150px"/>
+				{/if}
+            </div>
+            <div class="col-xs-8 invoice-payment" style="font-size:14px">
+                <ul class="list-unstyled">
+                    <li><font class="col-xs-4">Nama </font>
+                        <font class="col-xs-8">: {$jadwal->namaCmb}</font>
+                    </li>
+                    <li>
+                        <font class="col-xs-4">Nomor Formulir</font>
+                        <font class="col-xs-8">: {$jadwal->nomor}</font>
+                    </li>
+                    <li>
+                        <font class="col-xs-4">Periode</font>
+                        <font class="col-xs-8">: {$jadwal->namaEvent}</font>
+                    </li>
+                    <li>
+                        <font class="col-xs-4">Program Studi</font>
+                        <font class="col-xs-8">: {$jadwal->progdi}</font>
+                    </li>
+                    <li>
+                        <font class="col-xs-4">Jalur Seleksi</font>
+                        <font class="col-xs-8">: {$jadwal->jalurCmb}</font>
+                    </li>
+                </ul>
+            </div>
+		</div>
+        <div class="row" style="font-size:12px">
+            <div class="col-xs-5">
+                <h4>Tanggal Ujian</h4>
+                <ul class="list-unstyled">
+                    <li style="border: 1px solid;padding: 10px;">{$jadwal->hari}, {$jadwal->days} {$jadwal->bulan} {$jadwal->tahun}</li>
+                </ul>
+                <ul class="list-unstyled">
+                    <li style="border: 1px solid;padding: 10px;">{$jadwal->jamMasuk} - {$jadwal->jamKeluar}</li>
+                </ul>
+            </div>
+            <div class="col-xs-7">
+                <h4>Lokasi Ujian</h4>
+				<ul class="list-unstyled">
+                    <li style="border: 1px solid;padding: 10px;">
+						{$jadwal->namaGedung}, {$jadwal->namaRuang}<br>
+						Universitas Paramadina <br>
+						{$jadwal->prop}, {$jadwal->kabKota} <br>
+						{$jadwal->alamat}, {$jadwal->kodePos}
+					</li>
+                </ul>
+                <!-- <ul class="list-unstyled"> -->
+                    <!-- <li>{$jadwal->prop}, {$jadwal->kabKota}</li> -->
+                    <!-- <li>{$jadwal->alamat}, {$jadwal->kodePos}</li> -->
+                    <!-- <li>Tlp. {$jadwal->tel}</li> -->
+                    <!-- <li>Fax. {$jadwal->fax}</li> -->
+                    <!-- <li>admission@paramadina.ac.id</li> -->
+                <!-- </ul> -->
+            </div>
+        </div>
+        <div class="well col-xs-12">
+            <h4>Berkas yang harus dibawa :</h4>
+			{if $jadwal->jalur eq 'JP'}
+            <ul class="list-unstyled">
+                <li>1. Fotocopy KTP Ibu</li>
+                <li>2. Fotocopy rapor dari kelas 1-3 yang terakhir</li>
+                <li>3. Fotocopy Kartu Keluarga</li>
+                <li>4. Fotocopy Akte Kelahiran</li>
+                <li>5. Fotocopy Ijazah SMA Legalisir</li><br>
+                <li><strong>Copy seluruh data kelengkapan untuk dibawa pada saat ujian masuk.</strong>
+                </li>
+                <li><strong>Perlengkapan persyaratan ujian diserahkan ke kampus saat ujian, 
+					atau bisa di scan dan dikirim via email ke admission@paramadina.ac.id.
+					</strong>
+                </li>
+            </ul>
+			{else}
+            <ul class="list-unstyled">       
+                <li>1. Fotocopy KTP Ibu</li>
+                <li>2. Fotocopy rapor dari kelas 1-3 yang terakhir</li>
+                <li>3. Fotocopy Kartu Keluarga</li>
+                <li>4. Fotocopy Akte Kelahiran</li>
+                <li>5. Fotocopy Ijazah SMA Legalisir</li><br>
+                <li><strong>Copy seluruh data kelengkapan untuk dibawa pada saat ujian masuk.</strong>
+                </li>
+                <li><strong>Perlengkapan persyaratan ujian diserahkan ke kampus saat ujian, 
+					atau bisa di scan dan dikirim via email ke admission@paramadina.ac.id.
+					</strong>
+                </li>
+            </ul>
+			{/if}
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="col-xs-4">
+            <h4>Tanda Tangan,</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <br>
+                </li>
+                <li>
+                    <br>
+                </li>
+                <li>
+                    <br>
+                </li>
+                <li>Pengawas</li>
+            </ul>
+        </div>
+        <div class="col-xs-4">
+
+        </div>
+        <div class="col-xs-4">
+            <h4>Tanda Tangan,</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <br>
+                </li>
+                <li>
+                    <br>
+                </li>
+                <li>
+                    <br>
+                </li>
+                <li>Pewawancara</li>
+            </ul>
+        </div>
+	</div>
+    <div class="col-xs-12">
+	<br>
+	<br>
+        <div class="row hidden-print">
+            <div class=" col-xs-12 invoice-block">
+                <ul class="list-unstyled amounts">
+                    <br>
+                    <a class="btn btn-sm blue hidden-print" onclick="javascript:window.print();">Print <i class="icon-print"></i></a>
+                  
+                    <span>Note : Gunakan browser Chrome untuk lebih mudah memodifikasi halaman print</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row col-md-2"></div>

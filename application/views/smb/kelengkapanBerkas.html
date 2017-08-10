@@ -1,0 +1,28 @@
+<form action="{$host}smb/berkas/save" enctype="multipart/form-data" class="form-horizontal form-bordered form-row-stripped" id="form_sample_1" method="post">
+    <div class="portlet box grey">
+        <div class="portlet-body form" style="border-top: 1px double #4682B4;">
+            <div class="form-body" style="font-size:bold">
+                <h3 class="form-section" style="margin-bottom: 0px; margin-left: 50px;margin-top: 12px;">Kelengkapan Berkas</h3>
+                <input name="kode" value="{$prof->kode_smb}" hidden>
+                <input name="nomor" value="{$prof->no_smb}" hidden>
+				{foreach from=$berkas item=row}
+				<div class="form-group">
+                    <h4 class="control-label col-md-10" style="text-align:left;">{$row.nama_berkas}</h4>
+                    <div class="col-md-2" >
+                        <label>
+                            <input type="checkbox" name='{$row.id_berkas}' value="1" 
+								{if $row.status eq '1'}checked{/if}>
+                        </label>
+                    </div>
+                </div>
+				{/foreach}
+                
+                <div class="modal-footer">
+                    <button type="reset" class="btn default" data-dismiss="modal">Reset</button>
+                    <button type="submit" class="btn blue" id="save" value="passW" name="opt">Simpan <i class="icon-save"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
