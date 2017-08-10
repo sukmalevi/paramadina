@@ -113,7 +113,7 @@
 			{/if}
             <li class="{if $modul eq 'smb/'}active{/if}">
                <a href="javascript:;">
-               <i class="icon-sitemap"></i> 
+               <i class="icon-tasks"></i> 
                <span class="title">Seleksi CMB</span>
                <span class="selected"></span>
                <span class="arrow "></span>
@@ -152,7 +152,7 @@
             </li>
 			<li class="{if $modul eq 'cmb/'}active{/if}">
                <a href="javascript:;">
-               <i class="icon-sitemap"></i> 
+               <i class="icon-cogs"></i> 
                <span class="title">Manajemen CMB</span>
                <span class="selected"></span>
                <span class="arrow "></span>
@@ -171,7 +171,7 @@
             </li>
 			<li class="{if $modul eq 'mahasiswa/'}active{/if}">
                <a href="javascript:;">
-               <i class="icon-sitemap"></i> 
+               <i class="icon-user"></i> 
                <span class="title">Mahasiswa</span>
                <span class="selected"></span>
                <span class="arrow "></span>
@@ -187,7 +187,7 @@
             </li>
 			<li class="{if $modul eq 'Laporan/'}active{/if}">
                <a href="javascript:;">
-               <i class="icon-sitemap"></i> 
+               <i class="icon-briefcase"></i> 
                <span class="title">Laporan</span>
                <span class="selected"></span>
                <span class="arrow "></span>
@@ -195,6 +195,19 @@
                <ul class="sub-menu">
                   <li class="{if $pages eq 'seleksi'}active{/if}">
                      <a href="{$host}home/laporan/select">Laporan Seleksi</a>
+                  </li>
+               </ul>
+            </li>
+			<li class="{if $modul eq 'Laporan/'}active{/if}">
+               <a href="javascript:;">
+               <i class="icon-money"></i> 
+               <span class="title">Keuangan</span>
+               <span class="selected"></span>
+               <span class="arrow "></span>
+               </a>
+               <ul class="sub-menu">
+                  <li class="{if $pages eq 'seleksi'}active{/if}">
+                     <a href="{$host}home/laporan/select">Tagihan Kelas Malam</a>
                   </li>
                </ul>
             </li>
