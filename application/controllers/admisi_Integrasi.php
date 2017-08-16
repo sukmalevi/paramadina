@@ -615,7 +615,7 @@ class Admisi_Integrasi extends CI_Controller{
 		
 	}
 	
-	function generateTagParalel($kode = ''){    
+	function generateTagParalel($kode = 'claudia.hutagalung@gmail.com'){    
 
             $host_asik = "https://asik.paramadina.ac.id/gt/gtpembayaran/";
             $service_url = $host_asik . 'index.php?mod=service&sub=generateTagihanRegistrasiPar&act=rest&typ=rest';               
@@ -640,7 +640,7 @@ class Admisi_Integrasi extends CI_Controller{
 			
             $periodeQry = "SELECT A.*, CONCAT(A.tahun, A.semester)as periode 
 				FROM adis_periode_master A 
-				WHERE (tahun >= '$tahun' AND jenjangType = 1) AND kode = '2016.1.2';";
+				WHERE (tahun >= '$tahun' AND jenjangType = 1) AND kode = '2017.1.1';";
             $result_per = $this->db2->query($periodeQry)->result_array();
             
             $arry = array();
@@ -702,14 +702,16 @@ class Admisi_Integrasi extends CI_Controller{
             array_splice( $arry['angsuranTagihan'], 0, 0, $valTagiUM);
             
 			##untuk generate tagihan dengan uang masuk
+			/*
             $data['mahasiswaNoPendaftaran'] = $sql['mahasiswaNoPendaftaran'];
             $data['tagihanPeriode'] = $arry['periodeTagihan'];
             $data['tagihanIsCicilan'] = $sql['tagihanIsCicilan'];
             $data['tglJatuhTempo'] = $arry['tglTagihan'];
             $data['nominalCicilan'] = $arry['angsuranTagihan'];
+			*/
             
 			##untuk generate tagihan paralel di periode periode berikutnya
-            /*$data['mahasiswaNoPendaftaran'] = $sql['mahasiswaNoPendaftaran'];
+            $data['mahasiswaNoPendaftaran'] = $sql['mahasiswaNoPendaftaran'];
             $data['tagihanIsCicilan'] = $sql['tagihanIsCicilan'];
 			
 			$k = 0;
@@ -719,12 +721,12 @@ class Admisi_Integrasi extends CI_Controller{
 				$data['nominalCicilan'][$k] = $arryValTagihan[$i];
 				
 				$k ++;
-			}*/
+			}
             
             $data = array($data);
 //		
 		   echo "<pre>";
-		   print_r($data);
+		   print_r($data);exit;
 		
             $curl_post_data = json_encode($data);
             $curl = curl_init();

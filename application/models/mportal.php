@@ -1485,8 +1485,7 @@ class Mportal extends CUTI_Model{
 		
 	}
 	
-	function listAngsuran($pilihan, $kodebayar, $periode){
-            
+	function listAngsuran($pilihan, $kodebayar, $periode){            
             
             $qry = "SELECT p.*, pr.singkatan as alias_prodi, pr.nama as prodi, p.kode as code
                         FROM adis_pembayaran_kelasmalam p
