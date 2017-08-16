@@ -1,0 +1,59 @@
+
+<div class="row ">
+	<div class="col-md-12 col-xs-12">
+		<div class="col-md-8" >
+			<select class="form-control" name="periodeD" id="periodeD" onchange="showAngsuran('{$kode}')">
+				{foreach name=lope from=$periode item=row}
+				<option value="{$row->kode}">{$row->nama}</option>
+				{/foreach}
+			</select>
+		</div>
+		<div class="col-md-4" >
+			<a class="btnGenerate btn blue btn-sm" href="#" onclick="genTagPar('{$kode}')" ><i class="icon-plus"></i> Generate Tagihan</a>
+		</div>
+	</div><hr>
+	<div class="col-md-12 col-xs-12">
+		<div id="angsuran" class="col-md-12"></div>
+	</div>
+</div>
+<script>
+{literal}
+jQuery(document).ready(function() {
+    showAngsuran('{/literal}{$kode}{literal}');
+}); 
+
+function genTagPar(kode){	
+	$.LoadingOverlay("show");	
+	$.post("{/literal}{$host}{literal}keuangan/tag_paralel/generate/select", {
+		'periode': $('#periodeD').val(),
+		'kode': kode
+	}, function(resp) {
+		if(resp == 1){
+			alert("Tagihan berhasil dibuat.");
+			$('.btnGenerate').removeClass('blue').addClass('green');
+			$('.btnGenerate').html('<i class="icon-check"></i> Berhasil');
+		}else{
+			alert(resp);
+			$('.btnGenerate').removeClass('blue').addClass('red');
+			$('.btnGenerate').html('<i class="icon-cross"></i> Gagal');
+		}
+		
+		setTimeout(function(){
+			$('.btnGenerate').removeClass('green').addClass('blue');
+			$('.btnGenerate').removeClass('red').addClass('blue');
+			$('.btnGenerate').html('<i class="icon-plus"></i> Generate Tagihan');
+		}, 1000);
+		$.LoadingOverlay("hide", true);
+		
+	});
+}
+function showAngsuran(kode){	
+	$.post("{/literal}{$host}{literal}keuangan/tag_paralel/angsuran/select", {
+		'periode': $('#periodeD').val(),
+		'kode':kode
+	}, function(resp) {
+		$('#angsuran').html(resp);
+	});
+}
+{/literal}
+</script>

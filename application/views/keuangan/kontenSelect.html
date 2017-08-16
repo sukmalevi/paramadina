@@ -1,0 +1,39 @@
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div class="row ">
+	<div class="col-md-12 col-xs-12">
+		<div class="col-md-6" >
+			<select class="form-control" name="periode" id="periode" onchange="select()">
+				{foreach name=lope from=$periode item=row}
+				<option value="{$row->kode}">{$row->nama}</option>
+				{/foreach}
+			</select>
+		</div>
+		<div class="col-md-6" >
+			<select class="form-control" name="prodi" id="prodi" onchange="select()">
+				<option value="all">Semua Prodi</option>
+				{foreach name=lope from=$prodi item=row}
+				<option value="{$row->kode}">{$row->nama}</option>
+				{/foreach}
+			</select>
+		</div>
+	</div>
+</div>
+	<hr>
+	<div id="kontenTbl" class="row"></div>
+<script>
+{literal}
+jQuery(document).ready(function() {
+    select();
+});  
+
+function select(){	
+	$.post("{/literal}{$host}{literal}keuangan/tag_paralel/table/select", {
+		'periode': $('#periode').val(),
+		'prodi': $('#prodi').val()
+	}, function(resp) {
+		$('#kontenTbl').html(resp);
+	});
+}
+{/literal}
+</script>

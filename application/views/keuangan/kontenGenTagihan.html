@@ -1,0 +1,87 @@
+<div class="col-md-12 col-xs-12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption">List tagihan mahasiswa paralel</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+		<div class="portlet-body flip-scroll">
+			<table class="table table-bordered table-striped table-condensed flip-content">
+				<thead class="flip-content">
+					<tr>
+						<th>Nim</th>
+						<th>Nama</th>
+						<th>Prodi</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{foreach from=$mhs item=row}
+					<tr>
+						<td>
+							<h4 class="panel-title">{$row.nim}</h4>
+						</td>
+						<td>
+							<h4 class="panel-title">{$row.nama}</h4>
+						</td>
+						<td>
+							<h4 class="panel-title">{$row.prodi} - {$row.lulus_acc}</h4>
+						</td>
+						<td>
+							<h4 class="panel-title">{$row.nim}</h4>
+						</td>
+						<td>
+							<a class="label label-sm label-info label-mini" href="#detAngsur" data-toggle="modal" onclick="detailAngsuran('{$row.kode}')" ><i class="icon-money"></i> Detil angsuran</a>
+						</td>
+						<td>
+							<a class="btn dark  btn-xs" href="#detAngsur" data-toggle="modal"  onclick="periodeAngsuran('{$row.kode}', '{$row.nama}')" ><i class="icon-cog"></i> Generate</a>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+				
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="detAngsur" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog  modal-wide">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblAngsuran"></div>
+            </div>
+			<div class="modal-footer">
+			</div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<script>
+{literal}
+function detailAngsuran(kode){
+	$.post("{/literal}{$host}{literal}keuangan/tag_paralel/detil/select", {
+		'kode': kode
+	}, function(resp) {
+		$('#title').html("Tabel detil angsuran");
+		$('#tblAngsuran').html(resp);
+	});
+}
+
+function periodeAngsuran(kode, nama){
+	$.post("{/literal}{$host}{literal}keuangan/tag_paralel/periode/select", {
+		'kode': kode
+	}, function(resp) {
+		$('#title').html("Generate tagihan paralel - "+nama);
+		$('#tblAngsuran').html(resp);
+	});
+}
+{/literal}
+</script>
